@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cabañas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Iniciar Sesión</h2>
+            <input type="password" id="apiKeyInput" placeholder="Contraseña">
+            <br><br>
+            <button onclick="login()" class="login-btn">Entrar</button>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="appContainer" style="display:none;">
+        <header>
+            <h1>🏘️ Gestión de Cabañas</h1>
+            <button onclick="showAddStayModal()" class="add-stay-btn">
+                ➕ Agregar Estadía
+            </button>
+            <button onclick="refreshDisplay()" class="add-stay-btn">
+                Actualizar
+            </button>
+        </header>
+
+        <div class="cabins-container">
+            <div class="cabin" id="cabana1">
+                <h2>Cabaña 1</h2>
+                <div class="current-stay"></div>
+                <div class="upcoming-stays"></div>
+            </div>
+            <div class="cabin" id="cabana2">
+                <h2>Cabaña 2</h2>
+                <div class="current-stay"></div>
+                <div class="upcoming-stays"></div>
+            </div>
+            <div class="cabin" id="cabana3">
+                <h2>Cabaña 3</h2>
+                <div class="current-stay"></div>
+                <div class="upcoming-stays"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Stay Modal -->
+    <div id="addStayModal" class="modal">
+        <div class="modal-content">
+            <h2>Agregar Estadía</h2>
+            <form id="addStayForm">
+                <select id="addCabinSelect">
+                    <option value="Cabaña 1">Cabaña 1</option>
+                    <option value="Cabaña 2">Cabaña 2</option>
+                    <option value="Cabaña 3">Cabaña 3</option>
+                </select>
+                <input type="text" id="addClientName" placeholder="Nombre del Cliente" required>
+                <input type="tel" id="addClientPhone" placeholder="Teléfono (Opcional)">
+                <label>Fecha de Inicio</label>
+                <input type="date" id="addStartDate" required>
+                <label>Fecha de Fin</label>
+                <input type="date" id="addEndDate" required>
+                <textarea id="addNotes" placeholder="Notas adicionales"></textarea>
+                <div class="modal-actions">
+                    <button type="button" onclick="saveNewStay()">Guardar</button>
+                    <button type="button" onclick="closeAddStayModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Stay Modal -->
+    <div id="editStayModal" class="modal">
+        <div class="modal-content">
+            <h2>Editar Estadía</h2>
+            <form id="editStayForm">
+                <select id="editCabinSelect">
+                    <option value="Cabaña 1">Cabaña 1</option>
+                    <option value="Cabaña 2">Cabaña 2</option>
+                    <option value="Cabaña 3">Cabaña 3</option>
+                </select>
+                <input type="text" id="editClientName" placeholder="Nombre del Cliente" required>
+                <input type="tel" id="editClientPhone" placeholder="Teléfono (Opcional)">
+                <label>Fecha de Inicio</label>
+                <input type="date" id="editStartDate" required>
+                <label>Fecha de Fin</label>
+                <input type="date" id="editEndDate" required>
+                <textarea id="editNotes" placeholder="Notas adicionales"></textarea>
+                <div class="modal-actions">
+                    <button type="button" onclick="saveEditStay()">Guardar</button>
+                    <button type="button" onclick="deleteCurrentStay()">Eliminar</button>
+                    <button type="button" onclick="closeEditStayModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Stay Modal -->
+    <div id="stayModal" class="modal">
+        <div class="modal-content">
+            <h2 id="stayModalTitle">Agregar Estadía</h2>
+            <form id="stayForm">
+                <select id="cabinSelect">
+                    <option value="Cabaña 1">Cabaña 1</option>
+                    <option value="Cabaña 2">Cabaña 2</option>
+                    <option value="Cabaña 3">Cabaña 3</option>
+                </select>
+                <input type="text" id="clientName" placeholder="Nombre del Cliente" required>
+                <input type="tel" id="clientPhone" placeholder="Teléfono (Opcional)">
+                <label>Fecha de Inicio</label>
+                <input type="date" id="startDate" required>
+                <label>Fecha de Fin</label>
+                <input type="date" id="endDate" required>
+                <textarea id="notes" placeholder="Notas adicionales"></textarea>
+                <div class="modal-actions">
+                    <button type="button" onclick="saveStay()">Guardar</button>
+                    <button type="button" onclick="closeModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
